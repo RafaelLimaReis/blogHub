@@ -49,8 +49,8 @@ export const mixins = {
         margin: 0 auto;
 
         @media (max-width: 1160px) {
-            padding-left: 1rem;
-            padding-right: 1rem;
+            margin-left: 1rem;
+            margin-right: 1rem;
         }
     `,
 }
