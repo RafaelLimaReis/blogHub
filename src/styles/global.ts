@@ -34,6 +34,7 @@ export const CardInfo = styled.div`
     border-radius: 10px;
     padding: 2rem 2.5rem;
     margin-top: -5rem;
+    box-shadow: 0 2px 28px rgba(0, 0, 0, 0.2);
 
     > img {
         width: 9.25rem;
@@ -65,6 +66,6 @@ export const CardInfo = styled.div`
         text-overflow: ellipsis;
         -webkit-line-clamp: 2;
         margin-bottom: 1.5rem;
-        height: 52px;
+        height: 3.25rem;
     }
 `

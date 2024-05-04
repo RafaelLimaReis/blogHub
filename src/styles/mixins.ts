@@ -48,7 +48,7 @@ export const mixins = {
         max-width: 54.375rem;
         margin: 0 auto;
 
-        @media (max-width: 1160px) {
+        @media (max-width: 905px) {
             margin-left: 1rem;
             margin-right: 1rem;
         }

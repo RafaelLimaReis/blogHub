@@ -3,7 +3,7 @@ import backgroundImage from '../../assets/images/fundo.png'
 
 export const HeaderContainer = styled.header`
     background: url(${backgroundImage});
-    height: 296px;
+    height: 18.5rem;
     background-size: 100% 100%;
     background-position: center;
 
@@ -12,6 +12,6 @@ export const HeaderContainer = styled.header`
     align-items: flex-start;
 
     img {
-        margin-top: 64px;
+        margin-top: 4rem;
     }
 `
