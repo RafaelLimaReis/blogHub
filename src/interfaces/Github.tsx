@@ -5,6 +5,8 @@ export interface PostsInterface {
     title: string
     created_at: string
     body: string
+    user: UserOfPostPropsInterface
+    comments: number
 }
 
 export interface UserPropsInterface {
@@ -15,6 +17,10 @@ export interface UserPropsInterface {
     company: string
     followers: number
     avatar: string
+}
+
+export interface UserOfPostPropsInterface {
+    login: string
 }
 
 export interface GithubContextInterface {

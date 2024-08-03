@@ -1,24 +1,6 @@
 import styled from 'styled-components'
 import { mixins } from '../../styles/mixins'
-
-export const CardInfoGithub = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-
-    span {
-        ${mixins.fonts.textM}
-        color: ${(props) => props.theme['base-subtitle']};
-
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
-
-    @media (max-width: 754px) {
-        justify-content: center;
-    }
-`
+import { Link } from 'react-router-dom'
 
 export const ContainerContent = styled.div`
     ${mixins.limitContainer}
@@ -61,17 +43,20 @@ export const ContainerPosts = styled.div`
     flex-wrap: wrap;
     gap: 2rem;
     justify-content: center;
+
+    margin-bottom: 3rem;
 `
 
-export const Post = styled.div`
+export const Post = styled(Link)`
     background: ${(props) => props.theme['base-post']};
     max-width: calc((54.375rem / 2) - 1rem);
-    height: 16.25rem;
+    min-height: 16.25rem;
     width: 100%;
 
     padding: 2rem;
     border-radius: 10px;
     cursor: pointer;
+    text-decoration: none;
 
     > div {
         display: flex;
@@ -89,6 +74,7 @@ export const Post = styled.div`
             overflow: hidden;
             text-overflow: ellipsis;
             -webkit-line-clamp: 2;
+            text-decoration: none;
         }
 
         time {
@@ -98,10 +84,13 @@ export const Post = styled.div`
     }
 
     span {
+        ${mixins.fonts.textM}
+
         display: -webkit-box;
         -webkit-box-orient: vertical;
         overflow: hidden;
         text-overflow: ellipsis;
         -webkit-line-clamp: 4;
+        color: ${(props) => props.theme['base-text']};
     }
 `

@@ -1,6 +1,10 @@
 import styled, { createGlobalStyle } from 'styled-components'
 import { mixins } from './mixins'
 
+interface TypeAlignCardProps {
+    type: 'start' | 'center'
+}
+
 export const GlobalStyle = createGlobalStyle`
     * {
         margin: 0;
@@ -23,12 +27,12 @@ export const GlobalStyle = createGlobalStyle`
     }
 `
 
-export const CardInfo = styled.div`
+export const CardInfo = styled.div<TypeAlignCardProps>`
     ${mixins.limitContainer}
 
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: ${(props) => props.type === 'center' ? 'center' : 'flex-start'};;
     gap: 2rem;
     background-color: ${(props) => props.theme['base-profile']};
     border-radius: 10px;
@@ -67,5 +71,24 @@ export const CardInfo = styled.div`
         -webkit-line-clamp: 2;
         margin-bottom: 1.5rem;
         height: 3.25rem;
+    }
+`
+
+export const CardInfoGithub = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+
+    span {
+        ${mixins.fonts.textM}
+        color: ${(props) => props.theme['base-subtitle']};
+
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    @media (max-width: 754px) {
+        justify-content: center;
     }
 `

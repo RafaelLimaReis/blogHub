@@ -1,21 +1,37 @@
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import Markdown from 'react-markdown'
 import { formatDistanceToNow } from 'date-fns'
 import { ptBR } from 'date-fns/locale/pt-BR'
 import { ArrowSquareOut, Buildings, Users } from 'phosphor-react'
 
-import { CardInfo } from '../../styles/global'
-import { CardInfoGithub, ContainerContent, ContainerPosts, Post } from './styles'
+import { CardInfo, CardInfoGithub } from '../../styles/global'
+import { ContainerContent, ContainerPosts, Post } from './styles'
 import { GithubContext } from '../../contexts/GithubContext'
 import githubLogo from '../../assets/images/github.svg'
+import { PostsInterface } from '../../interfaces/Github'
+
+const CustomLinkRenderer = () => {
+    return null;
+};
 
 export function Home() {
     const { posts, userInfo } = useContext(GithubContext)
+    const [filteredPosts, setFilteredPosts] = useState<PostsInterface[]>([])
+
+    useEffect(() => {
+        setFilteredPosts(posts);
+    }, [])
+
+    const handleFilteredPosts = (text: string) => {
+        const postsFilter = posts.filter((post) => post.title.toLowerCase().includes(text.toLowerCase()));
+
+        setFilteredPosts(postsFilter);
+    }
 
     return (
         <>
             {userInfo.name !== undefined && (
-                <CardInfo>
+                <CardInfo type='center'>
                     <img src={userInfo.avatar} alt="" />
                     <div style={{ flexGrow: 1 }}>
                         <div
@@ -44,11 +60,11 @@ export function Home() {
                                 {userInfo.username}
                             </span>
                             <span>
-                                <Buildings size={18} />
+                                <Buildings size={18} color='#3A536B' />
                                 {userInfo.company}
                             </span>
                             <span>
-                                <Users size={18} />
+                                <Users size={18} color='#3A536B' />
                                 {userInfo.followers}{' '}
                                 {userInfo.followers > 1 ? 'seguidores' : 'seguidor'}
                             </span>
@@ -70,12 +86,12 @@ export function Home() {
                         {posts.length} {posts.length > 1 ? 'publicações' : 'publicação'}
                     </small>
                 </div>
-                <input type="text" placeholder="Buscar conteúdo" />
+                <input onChange={(e) => handleFilteredPosts(e.target.value)} type="text" placeholder="Buscar conteúdo" />
                 <ContainerPosts>
-                    {posts.map((post) => {
+                    {filteredPosts.map((post) => {
                         return (
                             post.body !== null && (
-                                <Post key={post.id}>
+                                <Post key={post.id} to={`/post/${post.id}`}>
                                     <div>
                                         <h4 title={post.title}>{post.title}</h4>
                                         <time>
@@ -86,7 +102,9 @@ export function Home() {
                                         </time>
                                     </div>
                                     <span>
-                                        <Markdown>{post.body}</Markdown>
+                                        <Markdown components={{
+                                            a: CustomLinkRenderer
+                                        }}>{post.body}</Markdown>
                                     </span>
                                 </Post>
                             )
